@@ -1,0 +1,39 @@
+.Dd Feb 26, 2018
+.Dt FORMQ 1
+.Os
+.Sh NAME
+.Nm formq
+.Nd command line URL encoded form parser
+.Sh SYNOPSIS
+.Nm
+.Op Fl n
+.Op Ar key
+.Sh DESCRIPTION
+Reads a URL encoded form from standard input
+and prints the decoded value of the given
+.Ar key .
+No trailing newline character is printed if
+.Fl n
+is set.
+.Pp
+If no
+.Ar key
+is given, all keys and values are printed, one per line.
+.Sh EXAMPLES
+Decode a form:
+.Bd -literal -offset indent
+$ echo 'From=Dennis&Message=Hello%2C+World%21' | formq
+From=Dennis
+Message=Hello, World!
+.Ed
+.Pp
+Extract just the
+.Em Message
+key:
+.Bd -literal -offset indent
+$ echo 'From=Dennis&Message=Hello%2C+World%21' | formq Message
+Hello, World!
+.Ed
+.Sh AUTHORS
+.An Sijmen J. Mulder
+.Aq Mt ik@sjmulder.nl .
